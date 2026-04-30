@@ -3,7 +3,7 @@
   "displayName": "Xiaomi MiMo for Copilot Chat",
   "description": "Pick MiMo V2.5 Pro & V2.5 from the Copilot Chat model picker. Thinking mode, agent tools — zero config, BYOK.",
   "version": "0.1.0",
-  "publisher": "Sdcb",
+  "publisher": "sdmapvstool",
   "license": "MIT",
   "icon": "resources/icon.png",
   "repository": {
@@ -170,7 +170,7 @@
     "format:check": "oxfmt --check src/",
     "package": "vsce package -o dist/",
     "publish": "vsce publish",
-    "login": "vsce login Sdcb"
+    "login": "vsce login sdmapvstool"
   },
   "devDependencies": {
     "@types/node": "^25.6.0",

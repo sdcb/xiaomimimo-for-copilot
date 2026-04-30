@@ -21,7 +21,7 @@ export const WELCOME_SHOWN_KEY = 'mimo-copilot.welcomeShown';
 // ---- Walkthrough ----
 
 /** Walkthrough contribution ID. */
-export const WALKTHROUGH_ID = 'Sdcb.xiaomimimo-for-copilot#mimoGettingStarted';
+export const WALKTHROUGH_ID = 'sdmapvstool.xiaomimimo-for-copilot#mimoGettingStarted';
 
 // ---- Model picker ----
 

@@ -1,9 +1,9 @@
 <h1 align="center">Xiaomi MiMo for Copilot Chat</h1>
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=Sdcb.xiaomimimo-for-copilot"><img src="https://img.shields.io/badge/VS%20Code-Install%20Extension-blue?logo=visualstudiocode&style=for-the-badge" alt="Install in VS Code"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=Sdcb.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/version-short/Sdcb.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Version"></a>
-  <a href="https://marketplace.visualstudio.com/items?itemName=Sdcb.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/installs-short/Sdcb.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Installs"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://img.shields.io/badge/VS%20Code-Install%20Extension-blue?logo=visualstudiocode&style=for-the-badge" alt="Install in VS Code"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/version-short/sdmapvstool.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Version"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/installs-short/sdmapvstool.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Installs"></a>
 </p>
 
 **Pick MiMo V2.5 Pro & V2.5 from the Copilot Chat model picker — with thinking mode, vision, and agent tools.**
