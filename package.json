@@ -1,0 +1,183 @@
+{
+  "name": "xiaomimimo-for-copilot",
+  "displayName": "Xiaomi MiMo for Copilot Chat",
+  "description": "Pick MiMo V2.5 Pro & V2.5 from the Copilot Chat model picker. Thinking mode, agent tools — zero config, BYOK.",
+  "version": "0.1.0",
+  "publisher": "Sdcb",
+  "license": "MIT",
+  "icon": "resources/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sdcb/xiaomimimo-for-copilot"
+  },
+  "engines": {
+    "vscode": "^1.116.0",
+    "node": ">=24"
+  },
+  "extensionKind": [
+    "workspace"
+  ],
+  "categories": [
+    "AI",
+    "Chat",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "mimo",
+    "xiaomi",
+    "xiaomi mimo",
+    "copilot",
+    "github copilot",
+    "copilot chat",
+    "vision",
+    "byok",
+    "language model",
+    "thinking",
+    "reasoning",
+    "ai",
+    "chat"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "enabledApiProposals": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "mimo",
+        "displayName": "Xiaomi MiMo"
+      }
+    ],
+    "commands": [
+      {
+        "command": "mimo-copilot.setApiKey",
+        "title": "MiMo: Set API Key"
+      },
+      {
+        "command": "mimo-copilot.getApiKey",
+        "title": "MiMo: Get API Key"
+      },
+      {
+        "command": "mimo-copilot.clearApiKey",
+        "title": "MiMo: Clear API Key"
+      },
+      {
+        "command": "mimo-copilot.openSettings",
+        "title": "MiMo: Open Settings"
+      },
+      {
+        "command": "mimo-copilot.showLogs",
+        "title": "MiMo: Show Logs"
+      }
+    ],
+    "walkthroughs": [
+      {
+        "id": "mimoGettingStarted",
+        "title": "Xiaomi MiMo for Copilot Chat",
+        "description": "Set up MiMo models in Copilot Chat.",
+        "steps": [
+          {
+            "id": "setBaseUrl",
+            "title": "Choose your API region",
+            "description": "Choose the API endpoint that matches your MiMo subscription plan. Selecting the wrong one will result in errors.\n[Open Settings](command:mimo-copilot.openSettings)",
+            "media": {
+              "markdown": "resources/walkthrough/set-base-url.md"
+            }
+          },
+          {
+            "id": "setApiKey",
+            "title": "Set your MiMo API key",
+            "description": "[Get an API key](command:mimo-copilot.getApiKey) from xiaomimimo.com.\n[Set API Key](command:mimo-copilot.setApiKey)",
+            "media": {
+              "markdown": "resources/walkthrough/set-api-key.md"
+            },
+            "completionEvents": [
+              "onCommand:mimo-copilot.setApiKey"
+            ]
+          },
+          {
+            "id": "showModels",
+            "title": "Show MiMo models",
+            "description": "If the models are hidden, open VS Code's Language Models manager and show the MiMo models.\n[Open Language Models](command:workbench.action.chat.manage)",
+            "media": {
+              "markdown": "resources/walkthrough/show-models.md"
+            }
+          }
+        ]
+      }
+    ],
+    "configuration": {
+      "title": "MiMo Copilot",
+      "properties": {
+        "mimo-copilot.baseUrl": {
+          "type": "string",
+          "default": "https://api.xiaomimimo.com/v1",
+          "enum": [
+            "https://api.xiaomimimo.com/v1",
+            "https://token-plan-cn.xiaomimimo.com/v1",
+            "https://token-plan-sgp.xiaomimimo.com/v1",
+            "https://token-plan-ams.xiaomimimo.com/v1"
+          ],
+          "enumItemLabels": [
+            "No plan (default API)",
+            "Token Plan — China",
+            "Token Plan — Singapore",
+            "Token Plan — Europe"
+          ],
+          "enumDescriptions": [
+            "Standard API access without a subscription plan",
+            "Subscription plan, China cluster",
+            "Subscription plan, Singapore cluster",
+            "Subscription plan, Europe (Amsterdam) cluster"
+          ],
+          "description": "MiMo API base URL. Select a preset or enter a custom URL."
+        },
+        "mimo-copilot.maxTokens": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "description": "Maximum number of output tokens per request. Set to 0 to use the API default (capped at 131072). Useful for controlling costs."
+        },
+        "mimo-copilot.modelIdOverrides": {
+          "type": "object",
+          "default": {
+            "mimo-v2.5-pro": "mimo-v2.5-pro",
+            "mimo-v2.5": "mimo-v2.5"
+          },
+          "description": "Override the API model ID sent for each MiMo model. Defaults are prefilled with official MiMo IDs; change them only when using a compatible third-party API that uses different model names.",
+          "additionalProperties": false,
+          "properties": {
+            "mimo-v2.5-pro": {
+              "type": "string",
+              "description": "API model ID for MiMo V2.5 Pro"
+            },
+            "mimo-v2.5": {
+              "type": "string",
+              "description": "API model ID for MiMo V2.5"
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "oxlint",
+    "format": "oxfmt --write src/",
+    "format:check": "oxfmt --check src/",
+    "package": "vsce package -o dist/",
+    "publish": "vsce publish",
+    "login": "vsce login Sdcb"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@types/vscode": "^1.116.0",
+    "@vscode/vsce": "^3.9.1",
+    "oxfmt": "^0.47.0",
+    "oxlint": "^1.62.0",
+    "typescript": "^6.0.3"
+  }
+}

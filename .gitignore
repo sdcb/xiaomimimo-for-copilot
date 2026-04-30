@@ -1,0 +1,9 @@
+out/
+dist/
+node_modules/
+*.vsix
+.vscode-test/
+.dev/
+.DS_Store
+.env*
+!.env.example

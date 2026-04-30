@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run format:check
+
+      - run: npm run compile
+
+      - run: mkdir -p dist && npm run package
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xiaomimimo-for-copilot.vsix
+          path: dist/*.vsix
+          retention-days: 30
