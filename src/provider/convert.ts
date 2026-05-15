@@ -1,5 +1,5 @@
 import vscode from 'vscode';
-import type { MiMoMessage, MiMoTool, MiMoToolCall } from '../types';
+import type { MiMoContentPart, MiMoMessage, MiMoTool, MiMoToolCall } from '../types';
 import type { ReasoningEntry } from './cache';
 
 /**
@@ -17,13 +17,22 @@ export function convertMessages(
 	for (const message of messages) {
 		const role = mapRole(message.role);
 
-		let content = '';
+		let textContent = '';
+		const imageParts: MiMoContentPart[] = [];
 		const toolCalls: MiMoToolCall[] = [];
 		const toolResults: Array<{ callId: string; content: string }> = [];
 
 		for (const part of message.content) {
 			if (part instanceof vscode.LanguageModelTextPart) {
-				content += part.value;
+				textContent += part.value;
+			} else if (part instanceof vscode.LanguageModelDataPart) {
+				if (part.mimeType.startsWith('image/')) {
+					const base64 = Buffer.from(part.data).toString('base64');
+					imageParts.push({
+						type: 'image_url',
+						image_url: { url: `data:${part.mimeType};base64,${base64}` },
+					});
+				}
 			} else if (part instanceof vscode.LanguageModelToolCallPart) {
 				toolCalls.push({
 					id: part.callId,
@@ -61,10 +70,10 @@ export function convertMessages(
 				}
 			}
 
-			if (content || toolCalls.length > 0) {
+			if (textContent || toolCalls.length > 0) {
 				const msg: MiMoMessage = {
 					role: 'assistant' as const,
-					content: content || '',
+					content: textContent || '',
 				};
 
 				if (toolCalls.length > 0) {
@@ -77,10 +86,16 @@ export function convertMessages(
 
 				result.push(msg);
 			}
-		} else if (content) {
+		} else if (textContent || imageParts.length > 0) {
+			// Build multipart content when images are present
+			const content: MiMoMessage['content'] =
+				imageParts.length > 0
+					? [...(textContent ? [{ type: 'text' as const, text: textContent }] : []), ...imageParts]
+					: textContent;
+
 			result.push({
 				role: role as 'user' | 'assistant',
-				content: content,
+				content,
 			});
 		}
 

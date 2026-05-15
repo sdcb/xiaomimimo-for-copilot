@@ -4,9 +4,16 @@
 
 // ---- API request/response types ----
 
+export type MiMoContentPart =
+	| { type: 'text'; text: string }
+	| {
+			type: 'image_url';
+			image_url: { url: string; detail?: 'auto' | 'low' | 'high' };
+	  };
+
 export interface MiMoMessage {
 	role: 'system' | 'user' | 'assistant' | 'tool';
-	content: string;
+	content: string | MiMoContentPart[];
 	tool_call_id?: string;
 	tool_calls?: MiMoToolCall[];
 	reasoning_content?: string;
