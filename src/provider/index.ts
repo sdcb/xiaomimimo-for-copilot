@@ -247,7 +247,14 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 								` | reasoning=${reasoningTokens}` +
 								` | chars/tok=${this.charsPerToken.toFixed(2)}`,
 						);
-					},
+
+					// Report token usage to VS Code so the context window widget can render.
+					// Uses the same LanguageModelDataPart + 'usage' mime convention as
+					// Copilot's own BYOK providers (Anthropic, Gemini).
+					progress.report(
+						vscode.LanguageModelDataPart.json(usage, 'usage'),
+					);
+				},
 				},
 				token,
 			);
