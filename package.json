@@ -2,7 +2,7 @@
   "name": "xiaomimimo-for-copilot",
   "displayName": "Xiaomi MiMo for Copilot Chat",
   "description": "Pick MiMo V2.5 Pro & V2.5 from the Copilot Chat model picker. Thinking mode, agent tools — zero config, BYOK.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "publisher": "sdmapvstool",
   "license": "MIT",
   "icon": "resources/icon.png",
