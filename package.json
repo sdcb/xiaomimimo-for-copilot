@@ -79,8 +79,8 @@
         "steps": [
           {
             "id": "setBaseUrl",
-            "title": "Choose your API region",
-            "description": "Choose the API endpoint that matches your MiMo subscription plan. Selecting the wrong one will result in errors.\n[Open Settings](command:mimo-copilot.openSettings)",
+            "title": "Choose your plan endpoint",
+            "description": "Use the default API unless you have a Token Plan subscription. Do not choose this by your physical region alone.\n[Open Settings](command:mimo-copilot.openSettings)",
             "media": {
               "markdown": "resources/walkthrough/set-base-url.md"
             }
@@ -131,7 +131,7 @@
             "Subscription plan, Singapore cluster",
             "Subscription plan, Europe (Amsterdam) cluster"
           ],
-          "description": "MiMo API base URL. Select a preset or enter a custom URL."
+          "description": "MiMo API base URL. Leave the default unless you have a Token Plan subscription with its matching dedicated endpoint."
         },
         "mimo-copilot.maxTokens": {
           "type": "number",
