@@ -40,6 +40,7 @@ export class MiMoClient {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'api-key': this.apiKey,
 					Authorization: `Bearer ${this.apiKey}`,
 				},
 				body: JSON.stringify(requestBody),
