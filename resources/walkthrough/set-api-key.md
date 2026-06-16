@@ -1,4 +1,4 @@
-MiMo V2.5 Pro & V2.5 use your own MiMo API key to make them available in the Copilot Chat model picker.
+MiMo-V2.5-Pro-UltraSpeed, MiMo V2.5 Pro & V2.5 use your own MiMo API key to make them available in the Copilot Chat model picker.
 
 Paste it once, then update or remove it later from the Command Palette.
 

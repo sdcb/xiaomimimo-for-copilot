@@ -38,6 +38,21 @@ export const MAX_CACHE_SIZE = 200;
 /** Available MiMo models exposed through the language model provider. */
 export const MODELS: ModelDefinition[] = [
 	{
+		id: 'mimo-v2.5-pro-ultraspeed',
+		name: 'MiMo-V2.5-Pro-UltraSpeed',
+		family: 'mimo',
+		version: 'v2.5',
+		detail: 'UltraSpeed Pro reasoning model',
+		maxInputTokens: 917504,
+		maxOutputTokens: 131072,
+		capabilities: {
+			toolCalling: true,
+			imageInput: false,
+			thinking: true,
+		},
+		requiresThinkingParam: false,
+	},
+	{
 		id: 'mimo-v2.5-pro',
 		name: 'MiMo V2.5 Pro',
 		family: 'mimo',
