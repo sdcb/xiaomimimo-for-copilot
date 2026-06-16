@@ -117,21 +117,29 @@
             "https://api.xiaomimimo.com/v1",
             "https://token-plan-cn.xiaomimimo.com/v1",
             "https://token-plan-sgp.xiaomimimo.com/v1",
-            "https://token-plan-ams.xiaomimimo.com/v1"
+            "https://token-plan-ams.xiaomimimo.com/v1",
+            "use_the_custom_endpoint_keep_this_enum_value_long_to_avoid_showing_subtitle_in_dropdown"
           ],
           "enumItemLabels": [
             "No plan (default API)",
             "Token Plan — China",
             "Token Plan — Singapore",
-            "Token Plan — Europe"
+            "Token Plan — Europe",
+            "Custom Endpoint"
           ],
           "enumDescriptions": [
             "Standard API access without a subscription plan",
             "Subscription plan, China cluster",
             "Subscription plan, Singapore cluster",
-            "Subscription plan, Europe (Amsterdam) cluster"
+            "Subscription plan, Europe (Amsterdam) cluster",
+            "Use any OpenAI-compatible endpoint — fill in `mimo-copilot.customBaseUrl` below"
           ],
-          "description": "MiMo API base URL. Select a preset or enter a custom URL."
+          "description": "MiMo API base URL. Select a preset, or pick 'Custom Endpoint' and fill in `mimo-copilot.customBaseUrl`."
+        },
+        "mimo-copilot.customBaseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Custom API base URL used when `mimo-copilot.baseUrl` is set to 'Custom Endpoint'. Include the full URL, e.g. `https://your-proxy.example.com/v1`."
         },
         "mimo-copilot.maxTokens": {
           "type": "number",

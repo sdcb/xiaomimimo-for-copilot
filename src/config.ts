@@ -4,10 +4,32 @@ import { CONFIG_SECTION } from './consts';
 /**
  * Get MiMo API base URL from settings.
  * Falls back to the official endpoint when not configured.
+ * When the user picks "Custom Endpoint", reads `customBaseUrl` and throws
+ * if it is empty.
  */
 export function getBaseUrl(): string {
 	const config = vscode.workspace.getConfiguration(CONFIG_SECTION);
-	return config.get<string>('baseUrl') || 'https://api.xiaomimimo.com/v1';
+
+	type BaseUrl =
+		| (string & {})
+		| 'use_the_custom_endpoint_keep_this_enum_value_long_to_avoid_showing_subtitle_in_dropdown';
+
+	const base = config.get<BaseUrl>('baseUrl');
+
+	if (
+		base ===
+		'use_the_custom_endpoint_keep_this_enum_value_long_to_avoid_showing_subtitle_in_dropdown'
+	) {
+		const custom = config.get<string>('customBaseUrl')?.trim();
+		if (!custom) {
+			throw new Error(
+				'Custom endpoint selected but `mimo-copilot.customBaseUrl` is empty. Please set it in Settings.',
+			);
+		}
+		return custom;
+	}
+
+	return base || 'https://api.xiaomimimo.com/v1';
 }
 
 /**
