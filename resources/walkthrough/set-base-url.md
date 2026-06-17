@@ -8,9 +8,10 @@ The MiMo API has separate endpoints for each subscription plan. **You must selec
 | `token-plan-cn.xiaomimimo.com/v1` | Token Plan — China |
 | `token-plan-sgp.xiaomimimo.com/v1` | Token Plan — Singapore |
 | `token-plan-ams.xiaomimimo.com/v1` | Token Plan — Europe (Amsterdam) |
+| Custom Endpoint | Any OpenAI-compatible endpoint |
 
 To change the base URL:
 
 - Open **Settings** (`Ctrl + ,`)
 - Search for `mimo-copilot.baseUrl`
-- Select the endpoint that matches your plan
+- Select the endpoint that matches your plan, or pick **Custom Endpoint** and fill in `mimo-copilot.customBaseUrl`

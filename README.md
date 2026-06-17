@@ -55,12 +55,13 @@ Because this plugs into Copilot's native provider API, you get the full stack fo
 - **Instructions & skills** — all your `.instructions.md`, `AGENTS.md`, and skills just work
 - **Prompt caching stats** — MiMo's cache hit rate logged in the output channel so you can see the savings
 
-### Multi-Region API Support
+### Multi-Region API & Custom Endpoint Support
 Choose the API endpoint that matches your subscription plan:
 - Default API (no plan)
 - Token Plan — China
 - Token Plan — Singapore
 - Token Plan — Europe (Amsterdam)
+- **Custom Endpoint** — any OpenAI-compatible URL (set via `mimo-copilot.customBaseUrl`)
 
 ### Secure by Default
 API key lives in VS Code's `SecretStorage` (OS keychain on macOS / Windows / Linux). Never in `settings.json`, never in your Git history.
@@ -98,7 +99,8 @@ Both support thinking mode, tool calling, and 917K token context.
 
 | Setting | Default | Description |
 |---|---|---|
-| `mimo-copilot.baseUrl` | `https://api.xiaomimimo.com/v1` | API endpoint — select a preset or enter a custom URL |
+| `mimo-copilot.baseUrl` | `https://api.xiaomimimo.com/v1` | API endpoint — select a preset or pick 'Custom Endpoint' |
+| `mimo-copilot.customBaseUrl` | ` ` | Custom endpoint URL when baseUrl is set to 'Custom Endpoint' |
 | `mimo-copilot.maxTokens` | `0` | Max output tokens (`0` = API default, capped at 131072). Useful for cost control |
 | `mimo-copilot.modelIdOverrides` | `{...}` | Override API model IDs — only needed for compatible third-party APIs |
 
