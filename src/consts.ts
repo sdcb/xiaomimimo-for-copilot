@@ -62,7 +62,8 @@ export const MODELS: ModelDefinition[] = [
 		maxOutputTokens: 131072,
 		capabilities: {
 			toolCalling: true,
-			imageInput: false,
+			imageInput: true,
+			nativeVision: false,
 			thinking: true,
 		},
 		requiresThinkingParam: false,
@@ -78,6 +79,7 @@ export const MODELS: ModelDefinition[] = [
 		capabilities: {
 			toolCalling: true,
 			imageInput: true,
+			nativeVision: true,
 			thinking: true,
 		},
 		requiresThinkingParam: false,

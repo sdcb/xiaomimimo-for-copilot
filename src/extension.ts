@@ -25,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
 		context.subscriptions.push(
 			vscode.commands.registerCommand('mimo-copilot.setApiKey', () => provider.configureApiKey()),
 			vscode.commands.registerCommand('mimo-copilot.clearApiKey', () => provider.clearApiKey()),
+			vscode.commands.registerCommand('mimo-copilot.setVisionModel', () => provider.configureVisionProxy()),
 			vscode.lm.registerLanguageModelChatProvider('mimo', provider),
 		);
 

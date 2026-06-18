@@ -69,6 +69,10 @@
       {
         "command": "mimo-copilot.showLogs",
         "title": "MiMo: Show Logs"
+      },
+      {
+        "command": "mimo-copilot.setVisionModel",
+        "title": "MiMo: Configure Vision Proxy"
       }
     ],
     "walkthroughs": [
@@ -170,6 +174,20 @@
               "description": "API model ID for MiMo V2.5"
             }
           }
+        },
+        "mimo-copilot.visionModel": {
+          "type": "string",
+          "default": "",
+          "tags": [
+            "advanced"
+          ],
+          "markdownDescription": "Compatibility setting managed by [Configure Vision Proxy](command:mimo-copilot.setVisionModel). Stores the selected VS Code vision model when that source is active."
+        },
+        "mimo-copilot.visionPrompt": {
+          "type": "string",
+          "editPresentation": "multilineText",
+          "default": "Describe all image attachments in this message.\n\nIf there is one image, describe it directly.\nIf there are multiple images:\n1. Describe each image separately, preserving their order.\n2. Then provide a combined description explaining the overall context and relationships across the images.\n\nReturn one concise factual description suitable for inserting into a text-only chat prompt. Include visible text, objects, UI elements, people, and relevant context. Do not invent details.",
+          "markdownDescription": "Prompt sent to the vision proxy model when describing image attachments before forwarding them to MiMo.\n\n[Configure Vision Proxy](command:mimo-copilot.setVisionModel)"
         }
       }
     }

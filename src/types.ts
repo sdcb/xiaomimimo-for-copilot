@@ -121,6 +121,8 @@ export interface ModelDefinition {
 	capabilities: {
 		toolCalling: boolean;
 		imageInput: boolean;
+		/** Whether the model can natively process images (true) or needs vision proxy (false). */
+		nativeVision: boolean;
 		thinking: boolean;
 	};
 	requiresThinkingParam: boolean;

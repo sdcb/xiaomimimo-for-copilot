@@ -7,7 +7,7 @@ import { logger } from '../logger';
 import type { MiMoToolCall, ModelDefinition } from '../types';
 import { type ReasoningEntry, pruneReasoningCache } from './cache';
 import { convertMessages, convertTools, countMessageChars } from './convert';
-import { stripImagesIfNeeded } from './vision';
+import { resolveImageMessages, createVisionService } from './vision';
 
 /**
  * NOTE: Non-public API surface.
@@ -46,6 +46,9 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 	/** reasoning text → tool_call IDs cache. */
 	private readonly reasoningCache = new Map<string, ReasoningEntry>();
 
+	/** Vision proxy: bridges images to text descriptions for text-only models. */
+	private readonly vision: ReturnType<typeof createVisionService>;
+
 	/**
 	 * Adaptive chars-per-token ratio, calibrated from actual usage data.
 	 * Updated via exponential moving average each time the API reports real token counts.
@@ -54,6 +57,7 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 
 	constructor(context: vscode.ExtensionContext) {
 		this.authManager = new AuthManager(context);
+		this.vision = createVisionService(context);
 
 		context.subscriptions.push(
 			this.onDidChangeLanguageModelChatInformationEmitter,
@@ -87,6 +91,10 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 		await this.authManager.deleteApiKey();
 		this.onDidChangeLanguageModelChatInformationEmitter.fire();
 		vscode.window.showInformationMessage('MiMo API key removed.');
+	}
+
+	async configureVisionProxy(): Promise<void> {
+		await this.vision.openConfiguration();
 	}
 
 	async hasApiKey(): Promise<boolean> {
@@ -148,8 +156,13 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 			pruneReasoningCache(this.reasoningCache, true);
 		}
 
-		// Strip images for models that don't support vision
-		const resolvedMessages = stripImagesIfNeeded(messages, modelDef);
+		// Resolve images via vision proxy for models that cannot natively process images.
+		// imageInput=true lets Copilot accept pasted images; nativeVision indicates actual processing.
+		const needsVisionProxy = !modelDef?.capabilities.nativeVision;
+		const visionResolution = needsVisionProxy
+			? await resolveImageMessages(messages, token, () => this.vision.get())
+			: { messages, stats: { inputImageParts: 0, inputImageMessages: 0, currentImageMessages: 0, generatedImageMessages: 0, omittedImageMessages: 0, unavailableImageMessages: 0, failedImageMessages: 0, droppedImageParts: 0 }, initialResponseNotice: undefined };
+		const resolvedMessages = visionResolution.messages;
 		const mimoMessages = convertMessages(resolvedMessages, isThinkingModel, this.reasoningCache);
 		const tools = modelDef?.capabilities.toolCalling ? convertTools(options.tools) : undefined;
 
@@ -158,6 +171,7 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 		let accumulatedReasoning = '';
 		const pendingToolCallIds: string[] = [];
 		let responseMessageId: string | undefined;
+		let visionNoticeReported = false;
 
 		return new Promise<void>((resolve, reject) => {
 			client.streamChatCompletion(
@@ -171,10 +185,18 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 				},
 				{
 					onContent: (content: string) => {
+						if (!visionNoticeReported && visionResolution.initialResponseNotice) {
+							visionNoticeReported = true;
+							progress.report(new vscode.LanguageModelTextPart(visionResolution.initialResponseNotice));
+						}
 						progress.report(new vscode.LanguageModelTextPart(content));
 					},
 
 					onThinking: (text: string) => {
+						if (!visionNoticeReported && visionResolution.initialResponseNotice) {
+							visionNoticeReported = true;
+							progress.report(new vscode.LanguageModelTextPart(visionResolution.initialResponseNotice));
+						}
 						accumulatedReasoning += text;
 
 						// LanguageModelThinkingPart is a proposed API — the class
@@ -189,6 +211,10 @@ export class MiMoChatProvider implements vscode.LanguageModelChatProvider {
 					},
 
 					onToolCall: (toolCall: MiMoToolCall) => {
+						if (!visionNoticeReported && visionResolution.initialResponseNotice) {
+							visionNoticeReported = true;
+							progress.report(new vscode.LanguageModelTextPart(visionResolution.initialResponseNotice));
+						}
 						pendingToolCallIds.push(toolCall.id);
 
 						// Cache reasoning keyed by tool_call ID
