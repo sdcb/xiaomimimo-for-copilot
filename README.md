@@ -6,9 +6,9 @@
   <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/installs-short/sdmapvstool.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Installs"></a>
 </p>
 
-**Pick MiMo-V2.5-Pro-UltraSpeed, MiMo V2.5 Pro & V2.5 from the Copilot Chat model picker — with thinking mode, vision, and agent tools.**
+**Pick MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash from the Copilot Chat model picker — with thinking mode, vision, and agent tools.**
 
-Love Xiaomi MiMo's reasoning capabilities but don't want to leave Copilot Chat? This extension drops **MiMo-V2.5-Pro-UltraSpeed, MiMo V2.5 Pro & V2.5** straight into the model selector — with **thinking mode**, **vision** (V2.5), **tool calling**, and your own API key.
+Love Xiaomi MiMo's reasoning capabilities but don't want to leave Copilot Chat? This extension drops **MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash** straight into the model selector — with **thinking mode**, **vision**, **tool calling**, and your own API key.
 
 ## Why this extension?
 
@@ -16,13 +16,13 @@ Love Xiaomi MiMo's reasoning capabilities but don't want to leave Copilot Chat? 
 - **Agent mode, tool calling, instructions, MCP, skills — all of it still works.** Copilot's entire stack, now running on MiMo.
 - **Prompt caching that actually works.** The extension sends `prompt_cache_hit_tokens` back to the API so MiMo can validate and continue its server-side cache — no warm-up waste, no surprise re-computation.
 - **Reasoning token tracking.** Every response logs `reasoning_effort` feedback and exact reasoning token counts so you can see how much thinking the model invested.
-- **MiMo V2.5 supports vision.** Drop screenshots, UI mockups, or diagrams into chat — V2.5 can see and understand them.
-- **MiMo V2.5 Pro excels at deep reasoning.** Complex refactors, multi-step debugging, algorithm design — tasks that need serious thinking.
+- **Every MiMo V2.6 model supports vision.** Drop screenshots, UI mockups, or diagrams into chat — Pro, Flash, and UltraSpeed can see and understand them.
+- **MiMo V2.6 Pro excels at deep reasoning.** Complex refactors, multi-step debugging, algorithm design — tasks that need serious thinking.
 - **BYOK, pay MiMo directly.** Your API key, your bill, your rate limits. Stored in the OS keychain, never on disk.
 
 ## Features
 
-### MiMo-V2.5-Pro-UltraSpeed, MiMo V2.5 Pro & V2.5 in the model picker
+### MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash in the model picker
 All three models show up alongside GPT-4o, Claude, and friends in Copilot Chat's model selector. 917K token context on all three. Switch models mid-chat without losing history.
 
 ### Prompt Caching with Full Feedback Loop
@@ -45,8 +45,8 @@ Cache hit rates climb to **97–99%** on subsequent turns — meaning the model 
 ### Thinking Mode with Reasoning Token Visibility
 Full support for MiMo's `reasoning_content`. Watch the model's thought process in real-time as it tackles complex problems. Every response also reports the exact number of **reasoning tokens** consumed — so you know how much "thinking" each answer cost you.
 
-### Vision Support (MiMo V2.5)
-Drop a screenshot or UI mockup into chat and V2.5 will analyze it directly. Perfect for understanding code screenshots, design specs, and visual debugging.
+### Vision Support
+Drop a screenshot or UI mockup into chat and any MiMo V2.6 model will analyze it directly. Perfect for understanding code screenshots, design specs, and visual debugging.
 
 ### Inherits Every Copilot Capability
 Because this plugs into Copilot's native provider API, you get the full stack for free:
@@ -82,18 +82,18 @@ Pure VS Code API + Node.js built-ins. No Python, no Docker, no local proxy serve
 1. Install from the VS Code Marketplace
 2. Run **MiMo: Set API Key** from the Command Palette (`Ctrl+Shift+P`)
 3. Paste your API key
-4. Open Copilot Chat, click the model picker, pick **MiMo-V2.5-Pro-UltraSpeed**, **MiMo V2.5 Pro**, or **MiMo V2.5**
+4. Open Copilot Chat, click the model picker, pick **MiMo-V2.6-Pro-UltraSpeed**, **MiMo V2.6 Pro**, or **MiMo V2.6 Flash**
 5. That's it — chat away
 
 ## Models
 
 | Model | Best For | Vision |
 |---|---|---|
-| **MiMo-V2.5-Pro-UltraSpeed** | Fast Pro reasoning for latency-sensitive agent tasks | ❌ |
-| **MiMo V2.5 Pro** | Complex refactors, agent tasks, deep reasoning, algorithm design | ❌ |
-| **MiMo V2.5** | Fast everyday coding, quick edits, image analysis, UI understanding | ✅ |
+| **MiMo-V2.6-Pro-UltraSpeed** | Fast Pro reasoning for latency-sensitive agent tasks | ✅ |
+| **MiMo V2.6 Pro** | Complex refactors, agent tasks, deep reasoning, algorithm design | ✅ |
+| **MiMo V2.6 Flash** | Fast everyday coding, quick edits, image analysis, UI understanding | ✅ |
 
-Both support thinking mode, tool calling, and 917K token context.
+All three support thinking mode, vision, tool calling, and 917K token context.
 
 ## Settings
 
