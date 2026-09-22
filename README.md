@@ -1,29 +1,53 @@
 <h1 align="center">Xiaomi MiMo for Copilot Chat</h1>
 
 <p align="center">
+  <img src="resources/icon.png" width="96" alt="Extension icon">
+</p>
+
+<p align="center">
+  <b>Pick MiMo V2.6 from the Copilot Chat model picker — thinking mode, vision, and agent tools included.</b><br>
+  不换工具，只换模型 —— MiMo 直接出现在你已经在用的 Copilot Chat 里。
+</p>
+
+<p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://img.shields.io/badge/VS%20Code-Install%20Extension-blue?logo=visualstudiocode&style=for-the-badge" alt="Install in VS Code"></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/version-short/sdmapvstool.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Version"></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=sdmapvstool.xiaomimimo-for-copilot"><img src="https://vsmarketplacebadges.dev/installs-short/sdmapvstool.xiaomimimo-for-copilot.svg?style=for-the-badge" alt="Installs"></a>
+  <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="License">
 </p>
 
-**Pick MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash from the Copilot Chat model picker — with thinking mode, vision, and agent tools.**
+<p align="center">
+  <a href="#getting-started">快速开始</a> · <a href="#models">模型</a> · <a href="#features">特性</a> · <a href="#settings">设置</a> · <a href="https://github.com/Sdcb/xiaomimimo-for-copilot/issues">反馈问题</a>
+</p>
 
-Love Xiaomi MiMo's reasoning capabilities but don't want to leave Copilot Chat? This extension drops **MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash** straight into the model selector — with **thinking mode**, **vision**, **tool calling**, and your own API key.
+---
+
+**不换工具，只换模型。** 不新增侧边栏、不新增聊天窗口 —— **MiMo-V2.6-Pro-UltraSpeed、MiMo V2.6 Pro、V2.6 Flash** 三款模型直接出现在你已经在用的 Copilot Chat 模型选择器里，配合你自己的 API Key（BYOK）。
+
+### ✨ At a Glance
+
+| | |
+|---|---|
+| 🧠 **Thinking mode** | Watch `reasoning_content` live, with exact reasoning-token counts for every response |
+| 👁️ **Vision** | All three V2.6 models see screenshots, UI mockups, and diagrams you drop into chat |
+| 🤖 **Full agent stack** | Agent mode, tool calling, `.instructions.md`, MCP, and skills all keep working |
+| ⚡ **Real prompt caching** | Feeds `prompt_tokens_details.cached_tokens` back to the API — **97–99%** cache hits on multi-turn chats |
+| 📐 **1M context** | The same 1M-token context window on every model; switch models mid-chat |
+| 🔐 **Keys in the keychain** | API key stored in VS Code `SecretStorage` — never in `settings.json`, never in Git |
+| 🧩 **Zero runtime deps** | Pure VS Code API + Node.js built-ins — no Python, no Docker, no local proxy |
 
 ## Why this extension?
 
 - **Don't replace Copilot — power it up.** No new sidebar, no new chat UI to learn. Just new models in the picker you already use.
-- **Agent mode, tool calling, instructions, MCP, skills — all of it still works.** Copilot's entire stack, now running on MiMo.
 - **Prompt caching that actually works.** The extension sends `prompt_cache_hit_tokens` back to the API so MiMo can validate and continue its server-side cache — no warm-up waste, no surprise re-computation.
 - **Reasoning token tracking.** Every response logs `reasoning_effort` feedback and exact reasoning token counts so you can see how much thinking the model invested.
-- **Every MiMo V2.6 model supports vision.** Drop screenshots, UI mockups, or diagrams into chat — Pro, Flash, and UltraSpeed can see and understand them.
 - **MiMo V2.6 Pro excels at deep reasoning.** Complex refactors, multi-step debugging, algorithm design — tasks that need serious thinking.
 - **BYOK, pay MiMo directly.** Your API key, your bill, your rate limits. Stored in the OS keychain, never on disk.
 
 ## Features
 
 ### MiMo-V2.6-Pro-UltraSpeed, MiMo V2.6 Pro & V2.6 Flash in the model picker
-All three models show up alongside GPT-4o, Claude, and friends in Copilot Chat's model selector. 917K token context on all three. Switch models mid-chat without losing history.
+All three models show up alongside GPT-4o, Claude, and friends in Copilot Chat's model selector. 1M token context on all three. Switch models mid-chat without losing history.
 
 ### Prompt Caching with Full Feedback Loop
 Most "compatible" extensions blindly forward API responses. This one **closes the loop**: it reads `prompt_tokens_details.cached_tokens` from each response and feeds it back to the API on the next request, ensuring MiMo's server-side prompt cache stays warm across multi-turn conversations. The result — dramatically lower costs and latency on long agent sessions.
@@ -93,7 +117,7 @@ Pure VS Code API + Node.js built-ins. No Python, no Docker, no local proxy serve
 | **MiMo V2.6 Pro** | Complex refactors, agent tasks, deep reasoning, algorithm design | ✅ |
 | **MiMo V2.6 Flash** | Fast everyday coding, quick edits, image analysis, UI understanding | ✅ |
 
-All three support thinking mode, vision, tool calling, and 917K token context.
+All three support thinking mode, vision, tool calling, and 1M token context.
 
 ## Settings
 
